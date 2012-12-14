@@ -1,11 +1,12 @@
 /*
 ==UserScript==
 @name       Pandock: Flowdock UX fixes
+@namespace  cesarkawakami
 @version    0.2
 @description  Adds fixes to Flowdock UX, like keyboard shortcuts and a more readable UI
 @match      http*://*.flowdock.com/app/*
 @copyright  2012+, Cesar Kawakami
-@updateURL
+@updateURL  https://github.com/cesarkawakami/pandock/raw/latest/pandock.user.js
 ==/UserScript==
 */
 
