@@ -27,16 +27,6 @@ simulateMouseClick = (element) ->
 
 
 init = ($, window) ->
-    class TabHighlighter
-        updateTabHighlight: ->
-            $("#tab-bar li")
-                .css("border-bottom", "")
-                .has(".current")
-                    .css("border-bottom", "5px solid #666")
-
-        init: ->
-            window.setInterval @updateTabHighlight, 200
-
     class KeyboardMagic
         init: ->
             $("body").on "keydown", (evt) ->
@@ -58,10 +48,15 @@ init = ($, window) ->
                     nextTabElement = (x for x in tabElements when $(x).attr("href") == nextTab)[0]
                     simulateMouseClick nextTabElement
 
+                # close tabs with Alt-W
+                if evt.which == 87 and evt.altKey
+                    $("#tab-bar li.tabs-reorderable a.tab.current button.close").click()
+
+
     class AnnoyingWarningAnnihilator
         annihilate: ->
             $(".error")
-                .filter(-> /A New Desktop App Available/.exec $(@).html())
+                .filter(-> /New Desktop App Available/.exec $(@).html())
                 .remove()
 
         init: ->
@@ -83,7 +78,6 @@ init = ($, window) ->
                 .appendTo $("body")
 
             setInterval @prettify, 1000
-
 
     for cls in [KeyboardMagic, AnnoyingWarningAnnihilator, CodeHighlighter]
         (new cls).init()

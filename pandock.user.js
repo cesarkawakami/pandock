@@ -31,22 +31,7 @@
   };
 
   init = function($, window) {
-    var AnnoyingWarningAnnihilator, CodeHighlighter, KeyboardMagic, TabHighlighter, cls, _i, _len, _ref, _results;
-    TabHighlighter = (function() {
-
-      function TabHighlighter() {}
-
-      TabHighlighter.prototype.updateTabHighlight = function() {
-        return $("#tab-bar li").css("border-bottom", "").has(".current").css("border-bottom", "5px solid #666");
-      };
-
-      TabHighlighter.prototype.init = function() {
-        return window.setInterval(this.updateTabHighlight, 200);
-      };
-
-      return TabHighlighter;
-
-    })();
+    var AnnoyingWarningAnnihilator, CodeHighlighter, KeyboardMagic, cls, _i, _len, _ref, _results;
     KeyboardMagic = (function() {
 
       function KeyboardMagic() {}
@@ -86,7 +71,10 @@
               }
               return _results;
             })())[0];
-            return simulateMouseClick(nextTabElement);
+            simulateMouseClick(nextTabElement);
+          }
+          if (evt.which === 87 && evt.altKey) {
+            return $("#tab-bar li.tabs-reorderable a.tab.current button.close").click();
           }
         });
       };
@@ -100,7 +88,7 @@
 
       AnnoyingWarningAnnihilator.prototype.annihilate = function() {
         return $(".error").filter(function() {
-          return /A New Desktop App Available/.exec($(this).html());
+          return /New Desktop App Available/.exec($(this).html());
         }).remove();
       };
 
